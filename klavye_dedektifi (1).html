@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Klavye Dedektifi - Bilişim Teknolojileri</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&family=Lexend:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Atkinson Hyperlegible', 'Lexend', sans-serif; }
+        .custom-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1); }
+        .hyperlegible { font-family: 'Atkinson Hyperlegible', sans-serif; }
+        @keyframes pulse-once {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        .correct-pop { animation: pulse-once 0.3s ease-in-out; }
+
+        /* Real Mechanical Keycap 3D Styling */
+        .keycap-btn {
+            background: linear-gradient(180deg, #2dd4bf 0%, #0d9488 55%, #0f766e 100%);
+            box-shadow: 
+                inset 0 3px 0 rgba(255, 255, 255, 0.55),
+                inset 0 -5px 8px rgba(0, 0, 0, 0.35),
+                0 10px 0 #115e59,
+                0 16px 25px rgba(15, 118, 110, 0.4);
+            border-radius: 18px;
+            transition: all 0.08s ease-out;
+            border: 2px solid #134e4a;
+        }
+        .keycap-btn:hover {
+            background: linear-gradient(180deg, #5eead4 0%, #14b8a6 55%, #0d9488 100%);
+            box-shadow: 
+                inset 0 3px 0 rgba(255, 255, 255, 0.7),
+                inset 0 -5px 8px rgba(0, 0, 0, 0.35),
+                0 10px 0 #115e59,
+                0 20px 30px rgba(20, 184, 166, 0.5);
+        }
+        .keycap-btn:active {
+            transform: translateY(8px);
+            box-shadow: 
+                inset 0 2px 4px rgba(0, 0, 0, 0.5),
+                0 2px 0 #115e59,
+                0 4px 10px rgba(0, 0, 0, 0.25);
+        }
+        /* Keycap Concave Top Surface Effect */
+        .keycap-surface {
+            background: linear-gradient(180deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0) 100%);
+            border-radius: 12px;
+            border-top: 1px solid rgba(255, 255, 255, 0.3);
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-indigo-50 via-blue-50 to-purple-50 min-h-screen text-slate-800 flex flex-col justify-between">
+
+    <!-- HOME PAGE -->
+    <div id="home-page" class="min-h-screen flex flex-col justify-between w-full relative overflow-hidden bg-gradient-to-b from-slate-200 via-indigo-50/50 to-slate-300/80 text-slate-800">
+        <!-- IT Classroom Background Atmosphere -->
+        <div class="absolute inset-0 pointer-events-none select-none overflow-hidden z-0">
+            <!-- Warm Ambient Lights -->
+            <div class="absolute -top-32 left-1/4 w-96 h-96 bg-indigo-300/40 rounded-full blur-[100px]"></div>
+            <div class="absolute top-1/3 right-10 w-80 h-80 bg-amber-200/40 rounded-full blur-[90px]"></div>
+            <div class="absolute -bottom-20 left-10 w-96 h-96 bg-sky-200/50 rounded-full blur-[110px]"></div>
+
+            <!-- Soft Grid Tile Pattern -->
+            <div class="absolute inset-0 bg-[linear-gradient(to_right,#64748b12_1px,transparent_1px),linear-gradient(to_bottom,#64748b12_1px,transparent_1px)] bg-[size:3rem_3rem] [mask-image:radial-gradient(ellipse_70%_60%_at_50%_50%,#000_80%,transparent_100%)]"></div>
+
+            <!-- Smartboard Outline Backdrop -->
+            <svg class="absolute bottom-0 w-full opacity-35 text-indigo-900/30" preserveAspectRatio="none" viewBox="0 0 1440 340" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 340 L480 230 M1440 340 L960 230 M180 340 L560 230 M1260 340 L880 230 M380 340 L650 230 M1060 340 L790 230" stroke="#475569" stroke-width="1.5" stroke-dasharray="6 6" opacity="0.5"/>
+                <rect x="400" y="20" width="640" height="170" rx="14" fill="#334155" stroke="#1e293b" stroke-width="4"/>
+                <rect x="412" y="32" width="616" height="146" rx="8" fill="#1e293b"/>
+                <path d="M440 60 H980 M440 95 H880 M440 130 H780" stroke="#38bdf8" stroke-width="2.5" stroke-linecap="round" opacity="0.6"/>
+            </svg>
+        </div>
+
+        <!-- Header -->
+        <header class="bg-white/80 backdrop-blur-md border-b border-slate-300/70 sticky top-0 z-50 shadow-sm">
+            <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+                <div class="flex items-center gap-4">
+                    <div class="bg-indigo-600 text-white p-2.5 rounded-2xl shadow-md flex items-center justify-center overflow-hidden w-14 h-14 sm:w-16 sm:h-16 border border-indigo-400/30">
+                        <img src="https://lh3.googleusercontent.com/d/1d8SJ02YGl0Ehy1okZYL6J3cJfN9VYI-c" alt="Bilfen Logo" class="w-full h-full object-contain" onerror="this.onerror=null; this.src='https://placehold.co/100x100/4f46e5/ffffff?text=LOGO';">
+                    </div>
+                    <div>
+                        <h1 class="text-xl sm:text-2xl font-black bg-gradient-to-r from-indigo-700 via-purple-700 to-indigo-900 bg-clip-text text-transparent">Klavye Dedektifi</h1>
+                        <p class="text-xs text-slate-600 font-semibold">Bilişim Teknolojileri ve Yazılım Eğitimi</p>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="max-w-4xl mx-auto px-4 py-8 sm:py-12 w-full flex-grow flex flex-col justify-center items-center relative z-10">
+            <div class="bg-white/85 backdrop-blur-xl rounded-3xl p-6 sm:p-10 custom-shadow border border-slate-300/80 w-full flex flex-col items-center justify-center gap-8 text-center shadow-xl">
+                <!-- Monitor Screen Mockup -->
+                <div class="w-full max-w-3xl flex flex-col items-center">
+                    <div class="w-full bg-slate-800 p-2.5 sm:p-4 rounded-3xl border-4 border-slate-700 shadow-2xl relative">
+                        <div class="w-2.5 h-2.5 bg-slate-900 rounded-full mx-auto mb-2 border border-slate-600 flex items-center justify-center">
+                            <div class="w-1 h-1 bg-emerald-400 rounded-full"></div>
+                        </div>
+                        <div class="relative bg-slate-900 rounded-2xl overflow-hidden border border-slate-700/50 shadow-inner">
+                            <img src="https://lh3.googleusercontent.com/d/1he0-aEV3VGhPncvBRqxv31ciLp-tIH72" alt="Klavye Dedektifi Görseli" class="w-full h-auto max-h-[480px] object-contain mx-auto" onerror="this.onerror=null; this.src='https://placehold.co/600x400/4f46e5/ffffff?text=Klavye+Dedektifi';">
+                        </div>
+                    </div>
+                    <div class="w-20 sm:w-28 h-6 sm:h-8 bg-gradient-to-b from-slate-600 via-slate-700 to-slate-800 mx-auto -mt-0.5 shadow-md border-x border-slate-500"></div>
+                    <div class="w-44 sm:w-64 h-3 sm:h-4 bg-gradient-to-r from-slate-600 via-slate-500 to-slate-600 mx-auto rounded-t-xl rounded-b-md shadow-lg border-t border-slate-400"></div>
+                </div>
+
+                <!-- 3D Mechanical Keyboard Assembly Start Button -->
+                <div class="p-3 sm:p-4 bg-slate-800 rounded-3xl border-4 border-slate-900 shadow-2xl flex items-center justify-center gap-3 relative max-w-xl mx-auto w-full">
+                    <!-- Left Side Key Cap Accent -->
+                    <div class="hidden sm:flex flex-col gap-1 select-none pointer-events-none opacity-70">
+                        <div class="w-12 h-10 rounded-xl bg-slate-700 border-b-4 border-slate-900 flex items-center justify-center text-xs font-bold text-slate-300 shadow px-1">Shift</div>
+                    </div>
+
+                    <!-- Main Mechanical Keycap Button -->
+                    <button id="start-btn" onclick="startExercise()" class="keycap-btn flex-grow text-white font-black px-6 sm:px-10 py-4 sm:py-5 text-xl sm:text-2xl tracking-wider flex items-center justify-center select-none cursor-pointer relative group">
+                        <div class="keycap-surface w-full h-full absolute inset-1 pointer-events-none"></div>
+                        <div class="relative z-10 flex items-center gap-3">
+                            <span class="w-3 h-3 rounded-full bg-amber-300 animate-pulse shadow-[0_0_10px_#fde047]"></span>
+                            <span class="drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]">Etkinliğe Başla</span>
+                        </div>
+                    </button>
+
+                    <!-- Right Side Key Cap Accent -->
+                    <div class="hidden sm:flex flex-col gap-1 select-none pointer-events-none opacity-70">
+                        <div class="w-12 h-10 rounded-xl bg-slate-700 border-b-4 border-slate-900 flex items-center justify-center text-[10px] font-bold text-slate-300 shadow px-1 whitespace-nowrap">Alt Gr</div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="bg-white/80 border-t border-slate-300/70 py-4 text-center text-xs text-slate-600 font-medium relative z-10">
+            <p>Bilişim Teknolojileri ve Yazılım Dersi</p>
+        </footer>
+    </div>
+
+    <!-- EXERCISE PAGE -->
+    <div id="exercise-page" class="hidden min-h-screen flex-col justify-between w-full">
+        <header class="bg-white/80 backdrop-blur-md border-b border-indigo-100 sticky top-0 z-50">
+            <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col sm:flex-row justify-between items-center gap-4">
+                <div class="flex items-center gap-4">
+                    <div class="bg-indigo-600 text-white p-2.5 rounded-2xl shadow-md flex items-center justify-center overflow-hidden w-16 h-16">
+                        <img src="https://lh3.googleusercontent.com/d/1d8SJ02YGl0Ehy1okZYL6J3cJfN9VYI-c" alt="Logo" class="w-full h-full object-contain" onerror="this.onerror=null; this.src='https://placehold.co/100x100/4f46e5/ffffff?text=LOGO';">
+                    </div>
+                    <div>
+                        <h1 class="text-xl sm:text-2xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">Klavye Dedektifi</h1>
+                        <p class="text-xs text-slate-500 font-medium">Bilişim Teknolojileri ve Yazılım Eğitimi</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-3">
+                    <button onclick="showHomePage()" class="bg-indigo-50 hover:bg-indigo-100 text-indigo-700 px-4 py-2.5 rounded-xl text-sm font-semibold transition flex items-center gap-2 border border-indigo-200 shadow-sm">
+                        🏠 Ana Sayfa
+                    </button>
+                    <button onclick="resetAll()" class="bg-slate-100 hover:bg-slate-200 text-slate-700 px-4 py-2.5 rounded-xl text-sm font-semibold transition flex items-center gap-2 shadow-sm">
+                        🔄 Sıfırla
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <main class="max-w-7xl mx-auto px-4 py-8 w-full flex-grow flex flex-col gap-8">
+
+            <!-- Banner / Counter Header -->
+            <div class="bg-gradient-to-r from-indigo-600 to-violet-600 text-white p-6 rounded-3xl shadow-xl flex flex-col md:flex-row justify-between items-center gap-6">
+                <div class="space-y-2 text-center md:text-left">
+                    <div class="flex items-center justify-center md:justify-start gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center overflow-hidden p-1">
+                            <img src="https://lh3.googleusercontent.com/d/1d8SJ02YGl0Ehy1okZYL6J3cJfN9VYI-c" alt="Logo" class="w-full h-full object-contain" onerror="this.onerror=null; this.src='https://placehold.co/100x100/ffffff/4f46e5?text=LOGO';">
+                        </div>
+                        <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight">Klavye Becerilerini Geliştir!</h2>
+                    </div>
+                    <p class="text-indigo-100 text-sm max-w-xl">Üst satırda verilen sembolleri ve metinleri incele, ilgili tuş kombinasyonunu kullanarak altındaki kutucuğa yaz. Yazdığın an doğru ise yeşil, yanlış ise kırmızı olacak!</p>
+                </div>
+                <div class="bg-white/10 backdrop-blur-md p-4 rounded-2xl border border-white/20 flex gap-6 text-center">
+                    <div>
+                        <div id="completedCount" class="text-2xl font-black">0</div>
+                        <div class="text-xs text-indigo-200 uppercase font-semibold">Doğru</div>
+                    </div>
+                    <div class="w-px bg-white/20"></div>
+                    <div>
+                        <div id="totalCount" class="text-2xl font-black">0</div>
+                        <div class="text-xs text-indigo-200 uppercase font-semibold">Toplam</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 1: Shift Tuşu -->
+            <section class="bg-white rounded-3xl p-6 custom-shadow border border-slate-100 space-y-6">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-slate-100 pb-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center font-bold text-lg">⇧</div>
+                        <div>
+                            <h3 class="text-lg font-bold text-slate-800">1. SHIFT TUŞU İLE YAP</h3>
+                            <p class="text-xs text-slate-500">Klavyenin sol veya sağ Shift tuşuna basılı tutarak üst karakterleri yazın.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-10 gap-3" id="section1-grid">
+                    <!-- JS will populate -->
+                </div>
+            </section>
+
+            <!-- Section 2: Shift veya Caps Lock -->
+            <section class="bg-white rounded-3xl p-6 custom-shadow border border-slate-100 space-y-6">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-slate-100 pb-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-lg">🔠</div>
+                        <div>
+                            <h3 class="text-lg font-bold text-slate-800">2. SHIFT YA DA CAPS LOCK İLE YAP</h3>
+                            <p class="text-xs text-slate-500">Büyük harfleri ve kelimeleri yazmak için Shift ya da Caps Lock kullanın.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-9 gap-3" id="section2-grid">
+                    <!-- JS will populate -->
+                </div>
+            </section>
+
+            <!-- Section 3: AltGr Tuşu -->
+            <section class="bg-white rounded-3xl p-6 custom-shadow border border-slate-100 space-y-6">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-slate-100 pb-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-purple-100 text-purple-700 flex items-center justify-center font-bold text-xs">AltGr</div>
+                        <div>
+                            <h3 class="text-lg font-bold text-slate-800">3. ALTGR TUŞU İLE YAP</h3>
+                            <p class="text-xs text-slate-500">Klavyenin sağındaki AltGr tuşuna basılı tutarak özel karakterleri yazınız.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-9 gap-3" id="section3-grid">
+                    <!-- JS will populate -->
+                </div>
+            </section>
+
+            <!-- Section 4: Paragraf ve Enter -->
+            <section class="bg-white rounded-3xl p-6 custom-shadow border border-slate-100 space-y-6">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-slate-100 pb-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-blue-100 text-blue-700 flex items-center justify-center font-bold text-lg">↵</div>
+                        <div>
+                            <h3 class="text-lg font-bold text-slate-800">4. PARAGRAF VE ENTER TUŞU PRATİĞİ</h3>
+                            <p class="text-xs text-slate-500">Aşağıdaki paragrafı birebir yazarak Enter ve harf becerilerini geliştir.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="space-y-4">
+                    <!-- Target Paragraph -->
+                    <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 text-slate-700 text-base leading-relaxed whitespace-pre-wrap select-none tracking-wide font-sans" id="target-paragraph-text"></div>
+                    <!-- Typing Area -->
+                    <textarea id="paragraph-input" rows="5" placeholder="Buraya yazmaya başlayın..." 
+                        class="w-full bg-white border border-slate-300 rounded-xl py-3 px-4 text-sm font-medium text-slate-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition resize-y shadow-sm font-sans"></textarea>
+                </div>
+            </section>
+
+        </main>
+
+        <footer class="bg-white border-t border-slate-200 py-6 text-center text-xs text-slate-500 font-medium">
+            <p>Bilişim Teknolojileri ve Yazılım Dersi</p>
+        </footer>
+    </div>
+
+    <!-- Script Block -->
+    <script>
+        function startExercise() {
+            const homePage = document.getElementById('home-page');
+            const exPage = document.getElementById('exercise-page');
+            
+            if (homePage && exPage) {
+                homePage.classList.add('hidden');
+                exPage.classList.remove('hidden');
+                exPage.classList.add('flex');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                
+                // Focus on first input if available
+                setTimeout(() => {
+                    const firstInput = document.querySelector('#section1-grid input');
+                    if (firstInput) firstInput.focus();
+                }, 100);
+            }
+        }
+
+        function showHomePage() {
+            const homePage = document.getElementById('home-page');
+            const exPage = document.getElementById('exercise-page');
+            
+            if (homePage && exPage) {
+                exPage.classList.add('hidden');
+                exPage.classList.remove('flex');
+                homePage.classList.remove('hidden');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        const exercises = {
+            1: [
+                { target: '!', label: '!' },
+                { target: '+', label: '+' },
+                { target: '%', label: '%' },
+                { target: '&', label: '&' },
+                { target: '=', label: '=' },
+                { target: '?', label: '?' },
+                { target: ';', label: ';' },
+                { target: ':', label: ':' },
+                { target: "'", label: "'" },
+                { target: '>', label: '>' }
+            ],
+            2: [
+                { target: 'B', label: 'B' },
+                { target: 'i', label: 'i' },
+                { target: 'l', label: 'l' },
+                { target: 'F', label: 'F' },
+                { target: 'E', label: 'E' },
+                { target: 'n', label: 'n' },
+                { target: '2. Sınıf', label: '2. Sınıf' },
+                { target: 'Bilişim', label: 'Bilişim' },
+                { target: 'TEKNOLOJİ', label: 'TEKNOLOJİ' }
+            ],
+            3: [
+                { target: '#', label: '#' },
+                { target: '$', label: '$' },
+                { target: '{', label: '{' },
+                { target: '}', label: '}' },
+                { target: '[', label: '[' },
+                { target: ']', label: ']' },
+                { target: '\\', label: '\\' },
+                { target: '@', label: '@' },
+                { target: '{}', label: '{}' }
+            ]
+        };
+
+        const paragraphText = "Bir Klavye Dedektifi gibi dikkatle baktım,\nparmaklarımı doğru tuşlara bastım\nve bu gizemli görevi başarıyla bitirdim!";
+
+        function renderGrids() {
+            for (let sec in exercises) {
+                const container = document.getElementById(`section${sec}-grid`);
+                if (!container) continue;
+                container.innerHTML = '';
+                
+                exercises[sec].forEach((item, index) => {
+                    const card = document.createElement('div');
+                    card.className = "bg-slate-50 border border-slate-200/80 rounded-2xl p-3 flex flex-col items-center justify-between gap-2.5 transition hover:shadow-sm";
+                    
+                    const length = item.label.length;
+                    let textSize = "text-xl";
+                    let inputSize = "text-sm";
+                    if (length > 6) {
+                        textSize = "text-xs";
+                        inputSize = "text-[11px]";
+                    } else if (length > 4) {
+                        textSize = "text-sm";
+                        inputSize = "text-xs";
+                    } else if (length > 2) {
+                        textSize = "text-base";
+                        inputSize = "text-xs";
+                    }
+
+                    card.innerHTML = `
+                        <div class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Sıra ${index + 1}</div>
+                        <div class="bg-indigo-50 border border-indigo-200 text-indigo-700 font-black ${textSize} px-1.5 py-2.5 rounded-xl w-full text-center shadow-inner select-none truncate hyperlegible" title="${item.label}">
+                            ${item.label}
+                        </div>
+                        <input type="text" data-section="${sec}" data-index="${index}" data-target="${item.target}" placeholder="Yaz..." 
+                            class="w-full text-center bg-white border border-slate-300 rounded-xl py-2 px-1 ${inputSize} font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition input-box truncate hyperlegible"
+                            oninput="handleRealtimeInput(this)">
+                    `;
+                    container.appendChild(card);
+                });
+            }
+            updateStats();
+        }
+
+        function handleRealtimeInput(input) {
+            const userVal = input.value;
+            const targetVal = input.getAttribute('data-target');
+
+            if (userVal === '') {
+                input.className = "w-full text-center bg-white border border-slate-300 rounded-xl py-2 px-1 text-sm font-bold text-slate-800 transition truncate";
+            } else if (userVal === targetVal) {
+                input.className = "w-full text-center bg-emerald-50 border-2 border-emerald-500 rounded-xl py-2 px-1 text-sm font-bold text-emerald-800 transition shadow-sm correct-pop truncate";
+            } else {
+                if (userVal.length >= targetVal.length) {
+                    input.className = "w-full text-center bg-rose-50 border-2 border-rose-400 rounded-xl py-2 px-1 text-sm font-bold text-rose-800 transition shadow-sm truncate";
+                } else {
+                    input.className = "w-full text-center bg-amber-50 border-2 border-amber-300 rounded-xl py-2 px-1 text-sm font-bold text-amber-900 transition truncate";
+                }
+            }
+            updateStats();
+        }
+
+        function escapeHtml(str) {
+            return str
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+
+        function renderParagraphTarget(userVal) {
+            const targetEl = document.getElementById('target-paragraph-text');
+            if (!targetEl) return false;
+            
+            let html = '';
+            const targetVal = paragraphText;
+            let hasError = false;
+
+            for (let i = 0; i < targetVal.length; i++) {
+                const targetChar = targetVal[i];
+                let displayChar = escapeHtml(targetChar);
+                
+                if (i < userVal.length) {
+                    const userChar = userVal[i];
+                    if (userChar === targetChar) {
+                        html += `<span class="bg-emerald-200 text-emerald-950 font-semibold rounded px-[1px] py-[0.5px]">${displayChar}</span>`;
+                    } else {
+                        hasError = true;
+                        html += `<span class="bg-rose-300 text-rose-950 font-bold rounded px-[1px] py-[0.5px] underline decoration-rose-600">${displayChar}</span>`;
+                    }
+                } else if (i === userVal.length) {
+                    if (targetChar === '\n') {
+                        displayChar = '↵\n';
+                    }
+                    html += `<span class="bg-indigo-200 text-indigo-950 font-bold rounded px-[1px] py-[0.5px] underline decoration-indigo-600 animate-pulse">${displayChar}</span>`;
+                } else {
+                    html += `<span class="text-slate-500">${displayChar}</span>`;
+                }
+            }
+
+            if (userVal.length > targetVal.length) {
+                hasError = true;
+                const extraChars = userVal.slice(targetVal.length);
+                html += `<span class="bg-rose-400 text-white font-bold rounded px-1 ml-1" title="Fazla yazılan karakterler">${escapeHtml(extraChars)}</span>`;
+            }
+
+            targetEl.innerHTML = html;
+            return hasError;
+        }
+
+        function handleParagraphInput(textarea) {
+            const userVal = textarea.value;
+            const targetVal = textarea.getAttribute('data-target') || paragraphText;
+
+            const hasError = renderParagraphTarget(userVal);
+
+            if (userVal === '') {
+                textarea.className = "w-full bg-white border border-slate-300 rounded-xl py-3 px-4 text-sm font-medium text-slate-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition resize-y shadow-sm font-sans";
+            } else if (userVal === targetVal) {
+                textarea.className = "w-full bg-emerald-50 border-2 border-emerald-500 rounded-xl py-3 px-4 text-sm font-medium text-emerald-900 focus:outline-none transition resize-y shadow-sm correct-pop font-sans";
+            } else if (hasError) {
+                textarea.className = "w-full bg-rose-50 border-2 border-rose-400 rounded-xl py-3 px-4 text-sm font-medium text-rose-900 focus:outline-none focus:ring-2 focus:ring-rose-400 transition resize-y shadow-sm font-sans";
+            } else {
+                textarea.className = "w-full bg-indigo-50/50 border-2 border-indigo-300 rounded-xl py-3 px-4 text-sm font-medium text-indigo-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition resize-y shadow-sm font-sans";
+            }
+            updateStats();
+        }
+
+        function updateStats() {
+            const inputs = document.querySelectorAll('input[type="text"][data-target]');
+            let correct = 0;
+            inputs.forEach(input => {
+                if(input.value === input.getAttribute('data-target') && input.value !== '') {
+                    correct++;
+                }
+            });
+
+            const pArea = document.getElementById('paragraph-input');
+            let total = inputs.length;
+            if (pArea) {
+                total += 1;
+                if (pArea.value === paragraphText) {
+                    correct += 1;
+                }
+            }
+
+            const completedEl = document.getElementById('completedCount');
+            const totalEl = document.getElementById('totalCount');
+            if (completedEl) completedEl.innerText = correct;
+            if (totalEl) totalEl.innerText = total;
+        }
+
+        function resetAll() {
+            renderGrids();
+            const textarea = document.getElementById('paragraph-input');
+            if (textarea) {
+                textarea.value = '';
+                handleParagraphInput(textarea);
+            }
+        }
+
+        window.onload = function() {
+            renderGrids();
+            
+            const targetEl = document.getElementById('target-paragraph-text');
+            const textarea = document.getElementById('paragraph-input');
+            if(targetEl && textarea) {
+                textarea.setAttribute('data-target', paragraphText);
+                handleParagraphInput(textarea);
+                textarea.addEventListener('input', function() {
+                    handleParagraphInput(this);
+                });
+            }
+            updateStats();
+        };
+    </script>
+</body>
+</html>
